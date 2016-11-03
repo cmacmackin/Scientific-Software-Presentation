@@ -1,0 +1,36 @@
+@startuml
+!include style.uml
+
+class ParentClass {
++ publicComponent: integer
+- privateComponent: real
+
++ publicMethod(arg: real): logical
+- privateMethod()
+}
+
+class ChildClass {
++ publicComponent: integer
+- newPrivateComponent: logical
+
++ publicMethod(arg: real): logical
++ anotherMethod(arg1: integer, arg2: integer): integer
+}
+
+ParentClass <|-- ChildClass : Generalisation\n(Inheritance)
+
+abstract class AbstractClass {
++ {abstract} abstractMethod(arg1: real, arg2: real): real
+}
+
+class ImplementingClass {
++ contents: ChildClass
+
++ abstractMethod(arg1: real, arg2: real): real
++ localMethod(): real
+}
+
+AbstractClass <|.. ImplementingClass: Realisation\n(Implementation)
+ParentClass --* ImplementingClass: Composition
+
+@enduml

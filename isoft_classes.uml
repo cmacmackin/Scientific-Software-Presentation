@@ -1,0 +1,73 @@
+@startuml
+!include style.uml
+
+class Cryosphere <<puppeteer>> {
+  - ice_component: Glacier
+  - subice_component: BasalSurface
+  - current_time: real
+
+  + integrate(time: real)
+'  + write_data(outfile: character[*])
+}
+
+abstract class Field <<abstract calculus>> {
+  + {abstract} d_dx(): Field
+  + {abstract} operator+(rhs: Field): Field
+  + {abstract} operator-(rhs: Field): Field
+  + {abstract} operator*(rhs: Field): Field
+  + {abstract} operator*(rhs: real): Field
+  + {abstract} operator=(rhs: Field)
+  + {abstract} raw(): real[*]
+  + {abstract} set_from_raw(raw: real[*])
+}
+
+abstract class Glacier {
+  + {abstract} ice_thickness(): Field
+  - {abstract} state_vector(): real[*]
+  - {abstract} update(state_vector: real[*])
+  - {abstract} residual(old_state: Glacier, melt: Field): real[*]
+  - {abstract} set_time(time: real)
+  + integrate(old_state: Glacier, melt: Field, time: real)
+}
+
+abstract class BasalSurface {
+  + {abstract} basal_melt(): Field
+  - {abstract} state_vector(): real[*]
+  - {abstract} update(state_vector: real[*])
+  - {abstract} residual(ice_thickness: Field): real[*]
+  + solve(ice_thickness: Field, time: real)
+}
+
+class IceShelf {
+  - thickness: Field
+  - velocity: Field
+  - current_time: real
+
+  + ice_thickness(): Field
+  - state_vector(): real[*]
+  - update(state_vector: real[*])
+  - residual(old_state: Glacier, melt: Field): real[*]
+  - set_time(time: real)
+}
+
+class Plume {
+  - thickness: Field
+  - velocity: Field
+  - temperature: Field
+  - salinity: Field
+  - current_time: real
+
+  + basal_melt(ice_thickness): Field
+  - state_vector(): real[*]
+  - update(state_vector: real[*])
+  - residual(ice_thickness: Field): real[*]
+}
+
+Glacier <|.. IceShelf
+BasalSurface <|.. Plume
+Field --* IceShelf
+Field --* Plume
+Cryosphere *-- Glacier
+Cryosphere *-- BasalSurface
+
+@enduml

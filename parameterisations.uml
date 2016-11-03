@@ -1,0 +1,25 @@
+@startuml
+!include style.uml
+
+/'
+abstract class abstract_viscosity <<strategy>> {
+  + {abstract} ice_viscosity(velocity: Field, temperature: real, time: real): Field
+}
+'/
+
+abstract class abstract_entrainment <<strategy>> {
+  + {abstract} entrainment_rate(velocity: Field, thickness: Field, depth: Field, time: real): Field
+}
+
+/'
+abstract class abstract_melt <<strategy>> {
+  + {abstract} solve_for_melt(velocity:Field, pressure: Field, temperature: Field, salinity: Field, plume_thickness: Field, time: real)
+  + {abstract} salt_equation_terms(): Field
+  + {abstract} heat_equation_terms(): Field
+  + {abstract} melt_rate(): Field
+  + {abstract} has_heat_terms(): logical
+  + {abstract} has_salt_terms(): logical
+}
+'/
+
+@enduml

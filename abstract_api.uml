@@ -1,0 +1,31 @@
+@startuml
+!include style.uml
+
+class Problem {
+- discretisation: Differentiator
+- values: real[:]
+- grid: real[:]
+}
+
+abstract class Differentiator {
++ {abstract} differentiate(grid: real[:], values: real[:]): real[:]
+}
+
+class FiniteDiff2ndOrder {
+- stencil: real[3]
+
++ differentiate(grid: real[:], values: real[:]): real[:]
+}
+
+class FiniteDiff3rdOrder {
+- stencil: real[5]
+
++ differentiate(grid: real[:], values: real[:]): real[:]
+}
+
+Differentiator <|.. FiniteDiff2ndOrder
+Differentiator <|.. FiniteDiff3rdOrder
+
+Problem *- Differentiator
+
+@enduml

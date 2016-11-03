@@ -1,0 +1,24 @@
+@startuml
+!include style.uml
+
+participant "object1:ImplementingClass" as obj1
+participant "subobject:ParentClass" as subobj
+
+[-> obj1: localMethod()
+activate obj1
+
+obj1 -> obj1: abstractMethod(real1,real2)
+activate obj1
+obj1 --> obj1: return real
+deactivate obj1
+
+obj1 -> subobj: publicMethod(real1)
+activate subobj
+subobj --> obj1: return logical
+deactivate subobj
+
+[<-- obj1: return real
+deactivate obj1
+
+@enduml
+

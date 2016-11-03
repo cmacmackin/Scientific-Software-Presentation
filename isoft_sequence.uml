@@ -1,0 +1,43 @@
+@startuml
+!include style.uml
+
+participant "system:Cryosphere" as cryo
+participant "shelf:IceShelf" as ice
+participant "ocean:Plume" as plume
+participant "Nonlinear Solver" as solver
+
+[-> cryo: integrate(time)
+activate cryo
+
+cryo -> ice: ice_thickness()
+activate ice
+ice --> cryo: ice thickness
+deactivate ice
+
+cryo -> plume: solve(ice_thickness, time)
+activate plume
+plume -> solver: solve_iteratively()
+activate solver
+solver --> plume: state of plume
+deactivate solver
+plume --> cryo
+deactivate plume
+cryo -> plume: basal_melt()
+activate plume
+plume --> cryo: melt rate at base of ice
+deactivate plume
+
+cryo -> ice: integrate(basal_melt, time)
+activate ice
+ice -> solver: solve_iteratively()
+activate solver
+solver --> ice: state of shelf
+deactivate solver
+ice --> cryo
+deactivate ice
+
+[<-- cryo
+deactivate cryo
+
+@enduml
+

@@ -1,0 +1,11 @@
+@startuml
+!include style.uml
+
+abstract class Integrand <<abstract calculus>> {
++ {abstract} assignment=(rhs: Integrand)
++ {abstract} operator+(rhs: Integrand): Integrand
++ {abstract} operator*(rhs: real): Integrand
++ {abstract} t(): Integrand
+}
+
+@enduml

@@ -1,0 +1,11 @@
+*~
+auto/
+*.svg
+*.dia
+*.log
+*.nav
+*.out
+*.toc
+*.aux
+*.snm
+*.synctex.gz

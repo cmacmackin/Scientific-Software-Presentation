@@ -1,0 +1,5 @@
+@startuml
+!include style.uml
+skinparam classAttributeIconSize 0
+!include class_diagram.uml
+@enduml

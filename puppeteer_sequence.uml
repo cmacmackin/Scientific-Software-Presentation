@@ -1,0 +1,29 @@
+@startuml
+!include style.uml
+
+participant "Planet" as planet
+participant "Atmosphere" as air
+participant "Ocean" as water
+
+'[-> planet: integrate(time)
+activate planet
+
+planet -> air: surface_temp()
+activate air
+planet <-- air: T
+deactivate air
+planet -> air: surface_winds()
+activate air
+planet <-- air: U
+deactivate air
+
+planet -> water: integrate(time, T, U)
+activate water
+planet <-- water
+deactivate water
+
+'[<-- planet
+deactivate planet
+
+@enduml
+

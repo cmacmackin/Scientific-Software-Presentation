@@ -1,0 +1,11 @@
+@startuml
+!include style.uml
+
+class ExampleClass {
++ publicComponent: integer
+- privateComponent: real
+
++ publicMethod(arg: real): logical
+- privateMethod() 
+}
+@enduml

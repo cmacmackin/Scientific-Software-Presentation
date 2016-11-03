@@ -1,0 +1,25 @@
+!define BACKGROUND Azure
+!define LINES Black
+!define STEREO_BACK LightBlue 
+
+skinparam class {
+    BackgroundColor BACKGROUND
+    ArrowColor LINES
+    BorderColor LINES
+}
+skinparam stereotypeCBackgroundColor STEREO_BACK
+
+skinparam sequence {
+    ArrowColor LINES
+    ActorBorderColor LINES
+    LifeLineBorderColor gray
+    LifeLineBackgroundColor BACKGROUND
+
+    ParticipantBorderColor LINES
+    ParticipantBackgroundColor BACKGROUND
+
+    ActorBackgroundColor BACKGROUND
+    ActorFontColor LINES
+}
+skinparam sequenceParticipant underline
+
